@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>控制端</title>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-database.js"></script>
+</head>
+<body>
+  <h2>請用鍵盤 ← → 控制角色移動</h2>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyClurp9iYD07Kq-Tx7FmaEJ-9DFMJihlcQ",
+      authDomain: "kyokumori-interact.firebaseapp.com",
+      databaseURL: "https://kyokumori-interact-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "kyokumori-interact",
+      storageBucket: "kyokumori-interact.appspot.com",
+      messagingSenderId: "520696473033",
+      appId: "1:520696473033:web:bcbf25c6c6601fcc95f418",
+      measurementId: "G-HN89XTKR24"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database(app);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        db.ref('character/state').set({
+          action: 'left',
+          timestamp: Date.now()
+        });
+        console.log("送出：left");
+      } else if (event.key === 'ArrowRight') {
+        db.ref('character/state').set({
+          action: 'right',
+          timestamp: Date.now()
+        });
+        console.log("送出：right");
+      }
+    });
+  </script>
+</body>
+</html>
